@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { createUser } from '../services/userAPI';
+import Loading from '../components/Loading';
 
 class Login extends React.Component {
   constructor() {
@@ -7,6 +9,7 @@ class Login extends React.Component {
     this.state = {
       userName: '',
       isDisabled: true,
+      isLoading: false,
     };
   }
 
@@ -24,8 +27,18 @@ class Login extends React.Component {
     }
   };
 
+  saveUser = async () => {
+    const { userName } = this.state; const
+      { history } = this.props;
+    this.setState({ isLoading: true });
+    await createUser({ name: userName });
+    this.setState({ isLoading: false }, () => {
+      history.push('/search');
+    });
+  };
+
   render() {
-    const { userName, isDisabled } = this.state;
+    const { userName, isDisabled, isLoading } = this.state;
     return (
       <div data-testid="page-login">
         <form>
@@ -43,17 +56,22 @@ class Login extends React.Component {
           <button
             type="button"
             data-testid="login-submit-button"
-            onClick={ () => {
-              createUser({ name: userName });
-            } }
+            onClick={ this.saveUser }
             disabled={ isDisabled }
           >
             Entrar
           </button>
+          {isLoading && <Loading />}
         </form>
       </div>
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
 
 export default Login;

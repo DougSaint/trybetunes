@@ -40,7 +40,7 @@ class Login extends React.Component {
   render() {
     const { userName, isDisabled, isLoading } = this.state;
     return (
-      <div data-testid="page-login">
+      <div data-testid="page-login" className="container">
         <form>
           <label htmlFor="userName">
             UserName
@@ -55,6 +55,7 @@ class Login extends React.Component {
 
           <button
             type="button"
+            className="btn"
             data-testid="login-submit-button"
             onClick={ this.saveUser }
             disabled={ isDisabled }

@@ -1,0 +1,29 @@
+.header {
+  background-color: #ddd;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0 0;
+}
+
+.user {
+  color: #222831;
+  font-size: 1.3em;
+  justify-self: flex-end;
+  margin-right: 20px;
+  margin-top: 0;
+
+}
+
+.nav {
+  align-items: center;
+  display: flex;
+  margin-left: 20px;
+}
+
+.link {
+  color: #222831;
+  margin-bottom: 0;
+  margin-left: 20px;
+  text-decoration: none;
+}
+

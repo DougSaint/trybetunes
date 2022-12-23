@@ -1,0 +1,9 @@
+.musicWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.musicName {
+  display: inline-block;
+  margin-bottom: 5px;
+}

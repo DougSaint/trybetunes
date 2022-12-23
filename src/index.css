@@ -44,6 +44,7 @@ code {
   width: 80%;
   justify-content: center;
   color: #DDDDDD;
+  flex-direction: column;
 }
 
 .bi-search{
@@ -81,4 +82,44 @@ button:disabled {
 
 label input {
   margin-left: 10px;
+}
+
+
+.forms{
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  color: #DDDDDD;
+  margin-bottom: 30px;
+}
+
+section {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: auto;
+  gap: 2em;
+}
+.songs{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: auto;
+  gap: 2em;
+}
+.flex{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.description{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20%;
+  color: #DDDDDD;
+}
+.albumImg{
+  width: 50%;
+  
 }

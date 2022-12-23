@@ -1,0 +1,11 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.card-name {
+  color: white;
+  display: block;
+  text-decoration: none;
+}

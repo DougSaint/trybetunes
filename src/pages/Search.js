@@ -79,6 +79,7 @@ class Search extends React.Component {
     const matchAlbums = (
       <h3>
         Resultado de álbuns de:
+        {' '}
         {lastSearch}
       </h3>);
 

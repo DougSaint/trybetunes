@@ -123,3 +123,13 @@ section {
   width: 50%;
   
 }
+.description img{
+  width: 100%;
+}
+
+.center{
+  align-items:  center;
+}
+.bi-star, .bi-star-fill{
+  margin: 10px 10px 0 0;
+}

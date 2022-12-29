@@ -19,8 +19,6 @@ class Album extends React.Component {
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
     const data = await getMusics(id);
-    console.log(data);
-
     this.setState({
       songs: data.filter((el) => el.trackName),
       artist: data[0].artistName,
@@ -31,6 +29,7 @@ class Album extends React.Component {
 
   render() {
     const { artist, albumName, songs, artworkUrl100 } = this.state;
+    const { attSongs } = this.props;
     return (
       <>
         <Header />
@@ -49,7 +48,11 @@ class Album extends React.Component {
           </aside>
 
           <section className="songs">
-            {songs.map((song) => <MusicCard { ...song } key={ song.trackId } />)}
+            {songs.map((song) => (<MusicCard
+              { ...song }
+              key={ song.trackId }
+              attSongs={ attSongs }
+            />))}
           </section>
         </div>
       </>

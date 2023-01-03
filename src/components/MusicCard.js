@@ -11,28 +11,22 @@ class MusicCard extends React.Component {
   };
 
   async componentDidMount() {
-    const favoriteSongs = await getFavoriteSongs();
+    const favoriteSongs = await getFavoriteSongs() || [];
     const { trackId } = this.props;
-
     if (favoriteSongs.some((song) => song.trackId === trackId)) {
       this.setState({ checkbox: true });
     }
   }
 
   favorite = async ({ target: { checked } }) => {
+    this.setState({ loading: true });
     const { attSongs } = this.props;
     if (checked) {
-      this.setState({
-        loading: true,
-        checkbox: true,
-      });
+      this.setState({ checkbox: true });
       await addSong({ ...this.props });
       this.setState({ loading: false }, attSongs);
     } else {
-      this.setState({
-        checkbox: false,
-        loading: true,
-      });
+      this.setState({ checkbox: false });
       await removeSong({ ...this.props });
       this.setState({ loading: false }, attSongs);
     }
@@ -43,16 +37,19 @@ class MusicCard extends React.Component {
     const { loading, checkbox } = this.state;
 
     const favoriteInput = (
-      <label data-testid={ `checkbox-music-${trackId}` } htmlFor="fav">
+      <label htmlFor={ trackId }>
         Favorita
         <input
           type="checkbox"
-          name="fav"
+          name={ trackId }
+          id={ trackId }
+          data-testid={ `checkbox-music-${trackId}` }
           onChange={ this.favorite }
           checked={ checkbox }
         />
       </label>
     );
+
     return (
       <div className="flex center">
 

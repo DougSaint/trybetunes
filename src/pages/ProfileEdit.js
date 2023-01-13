@@ -41,7 +41,7 @@ class ProfileEdit extends React.Component {
   validate() {
     const { user: { name, description, email, image } } = this.state;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    validateEmail = (emailToTest) => emailRegex.test(emailToTest);
+    const validateEmail = (emailToTest) => emailRegex.test(emailToTest);
     return name.length > 1 && description.length > 1
     && validateEmail(email) && image.length > 1;
   }

@@ -133,3 +133,56 @@ section {
 .bi-star, .bi-star-fill{
   margin: 10px 10px 0 0;
 }
+.favorite-song{
+  background-color: rgb(230, 105, 241);
+  width: 400px;
+  border-radius: 20px;
+  margin: 15px 0 0 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.profile-edit-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profile-edit-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.profile-edit-button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.profile-edit-button:hover {
+  background-color: #45a049;
+}
+
+

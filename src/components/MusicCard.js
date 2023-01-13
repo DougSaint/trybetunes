@@ -28,7 +28,8 @@ class MusicCard extends React.Component {
     } else {
       this.setState({ checkbox: false });
       await removeSong({ ...this.props });
-      this.setState({ loading: false }, attSongs);
+      await attSongs();
+      this.setState({ loading: false });
     }
   };
 

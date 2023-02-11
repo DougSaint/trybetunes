@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Content from './components/Content';
 
 class App extends React.Component {
   render() {
     return (
-      <HashRouter>
+      <BrowserRouter>
         <div className="app">
           <Content />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }

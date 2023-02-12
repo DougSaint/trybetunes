@@ -1,5 +1,6 @@
 <h1 style="text-align: center;">TrybeTunes  🎶</h1>
   
+<h3>Você pode testar a aplicação clicando <a href ="https://dougsaint.github.io/trybetunes/">Aqui</a></h3>
 
 O TrybeTunes se trata de uma ferramenta que criamos com o objetivo de aprimorar minhas habilidades em React e integrar-se com a API de pré-visualizações de música da Apple.
 

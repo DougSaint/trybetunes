@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/trybetunes/static/css/main.f13ec3be.css",
-    "main.js": "/trybetunes/static/js/main.19800590.js",
+    "main.css": "/trybetunes/static/css/main.48da65cc.css",
+    "main.js": "/trybetunes/static/js/main.a541f471.js",
+    "static/media/logo.png": "/trybetunes/static/media/logo.b17c30bf0e05fce5fcd8.png",
     "index.html": "/trybetunes/index.html",
-    "main.f13ec3be.css.map": "/trybetunes/static/css/main.f13ec3be.css.map",
-    "main.19800590.js.map": "/trybetunes/static/js/main.19800590.js.map"
+    "main.48da65cc.css.map": "/trybetunes/static/css/main.48da65cc.css.map",
+    "main.a541f471.js.map": "/trybetunes/static/js/main.a541f471.js.map"
   },
   "entrypoints": [
-    "static/css/main.f13ec3be.css",
-    "static/js/main.19800590.js"
+    "static/css/main.48da65cc.css",
+    "static/js/main.a541f471.js"
   ]
 }

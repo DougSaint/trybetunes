@@ -48,15 +48,15 @@ class MusicCard extends React.Component {
     const { loading, isFavorite } = this.state;
     
     return (
-      <div className="flex justify-between my-2">
+      <div className="flex justify-between my-2 ">
         {loading && <Loading />}
-        <div className="flex">
+        <div className="flex max-w-[60%]">
           <FontAwesomeIcon
             icon={faCirclePlay}
             onClick={() => setSelectedSong(this.props)}
-            className="w-8 my-auto cursor-pointer hover:text-slate-400 text-white"
+            className="min-w-8 max-w-8 px-2 my-auto cursor-pointer hover:text-slate-400 text-white "
           />
-          <p className="text-slate-50 font-italic">{trackName}</p>
+          <p className="text-slate-50 font-italic text-ellipsis overflow-hidden whitespace-nowrap ">{trackName}</p>
         </div>
 
         <div class="flex">

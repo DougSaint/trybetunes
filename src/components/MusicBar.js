@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import WaveSurfer from "https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.esm.js";
-import Timeline from "https://unpkg.com/wavesurfer.js@7/dist/plugins/timeline.esm.js";
+
+import Timeline from "wavesurfer.js/dist/plugins/timeline.js";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
+import WaveSurfer from "wavesurfer.js";
 // WaveSurfer hook
 const useWavesurfer = (containerRef, options) => {
   const [wavesurfer, setWavesurfer] = useState(null);
@@ -15,7 +17,16 @@ const useWavesurfer = (containerRef, options) => {
     const ws = WaveSurfer.create({
       ...options,
       container: containerRef.current,
-      height: 60,
+      waveColor: "#D9DCFF",
+      progressColor: "#39FF14",
+      barWidth: 3,
+      barRadius: 3,
+      cursorWidth: 1,
+      cursorWidth: 1,
+      height: 50,
+      responsive: true,
+      barGap: 3,
+      plugins: [],
     });
 
     setWavesurfer(ws);
@@ -40,11 +51,6 @@ const WaveSurferPlayer = (props) => {
   const onPlayClick = useCallback(() => {
     wavesurfer.isPlaying() ? wavesurfer.pause() : wavesurfer.play();
   }, [wavesurfer]);
-
-  // Initialize wavesurfer when the container mounts
-  // or any of the props change
-
-  // When the wavesurfer is ready, play the audio.
 
   useEffect(() => {
     if (!wavesurfer) return;
@@ -73,15 +79,14 @@ const WaveSurferPlayer = (props) => {
 
   return (
     <section className="relative">
-      <div ref={containerRef} style={{ minHeight: "120px" }} />
-
       <button
-        className="text-slate-50 absolute top-[50%] left-[50%] z-10"
+        className="text-slate-50 absolute top-[50%] left-[50%] z-10 border-2 border-slate-50 rounded-full w-12 h-12 flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2"
         onClick={onPlayClick}
         style={{ marginTop: "1em" }}
       >
         <FontAwesomeIcon color="white" icon={isPlaying ? faPause : faPlay} />
       </button>
+      <div ref={containerRef} style={{ minHeight: "120px" }} />
     </section>
   );
 };

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Login from '../pages/Login';
 import Favorites from '../pages/Favorites';
-import Search from '../pages/Search';
+import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import ProfileEdit from '../pages/ProfileEdit';
 import Album from '../pages/Album';
 import NotFound from '../pages/NotFound';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import SideBar from './SideBar';
 
 class Content extends React.Component {
   state = {
@@ -26,9 +26,10 @@ class Content extends React.Component {
   render() {
     const { favoriteSongs } = this.state;
     return (
-      <main>
+      <main className="min-h-[100vh] bg-slate-900 overflow-auto">
+        <SideBar />
         <Switch>
-          <Route exact path="/" component={ Login } />
+          <Route exact path="/" component={ Home } />
           <Route
             path="/favorites"
             render={ (props) => (<Favorites
@@ -37,7 +38,7 @@ class Content extends React.Component {
               attSongs={ this.attSongs }
             />) }
           />
-          <Route path="/search" component={ Search } />
+          
           <Route path="/profile/edit" component={ ProfileEdit } />
           <Route path="/profile" component={ Profile } />
           <Route
@@ -47,7 +48,6 @@ class Content extends React.Component {
               attSongs={ this.attSongs }
             />) }
           />
-
           <Route path="*" component={ NotFound } />
         </Switch>
       </main>

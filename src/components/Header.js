@@ -1,45 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getUser } from '../services/userAPI';
-import Loading from './Loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Header.css';
 
+import { faHome, faHeart } from '@fortawesome/free-solid-svg-icons';
+
 class Header extends React.Component {
-  state = {
-    loading: true,
-    clientInfo: '',
-  };
-
-  async componentDidMount() {
-    const info = await getUser();
-    this.setState({ clientInfo: info.name });
-    this.setState({ loading: false });
-  }
-
   render() {
-    const { loading, clientInfo } = this.state;
     return (
-      <header data-testid="header-component" className="header">
-
-        <nav className="nav">
-          <Link to="/search" data-testid="link-to-search" className="link">Search</Link>
-          <Link
-            to="/favorites"
-            data-testid="link-to-favorites"
-            className="link"
-          >
-            Favorites
+      <header className="bg-slate-900 text-[#fffbeb]">
+        <nav className="nav flex justify-between">
+          <Link to="/" className="mx-2">
+            <FontAwesomeIcon icon={ faHome } />
           </Link>
-          <Link
-            to="/profile"
-            data-testid="link-to-profile"
-            className="link"
-          >
-            Profile
+
+          <Link to="/favorites" className="mx-2">
+            <FontAwesomeIcon icon={ faHeart } />
           </Link>
         </nav>
-        {loading ? <Loading />
-          : <p data-testid="header-user-name" className="user">{clientInfo}</p>}
       </header>
     );
   }

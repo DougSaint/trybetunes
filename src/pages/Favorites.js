@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Header from '../components/Header';
-import MusicCard from '../components/MusicCard';
-import Loading from '../components/Loading';
+import React from "react";
+import PropTypes from "prop-types";
+import MusicCard from "../components/MusicCard";
+import Loading from "../components/Loading";
+import MusicBar from "../components/MusicBar";
 
 class Favorites extends React.Component {
-  state = { loading: false };
+  state = { loading: false, selectedSong: {} };
 
   async componentDidMount() {
     const { attSongs } = this.props;
@@ -14,23 +14,31 @@ class Favorites extends React.Component {
     this.setState({ loading: false });
   }
 
+  setSelectedSong = (song) => {
+    this.setState({ selectedSong: song });
+  };
+
   render() {
-    const { favoriteSongs, attSongs } = this.props;
-    const { loading } = this.state;
+    const { favoriteSongs, attSongs,  } = this.props;
+    const { loading, selectedSong } = this.state;
     return (
-      <>
-        <Header />
-        {loading ? <Loading /> : (
-          <div data-testid="page-favorites" className="favorite-song">
-            {favoriteSongs.map((song) => (<MusicCard
-              { ...song }
-              key={ song.trackId }
-              attSongs={ attSongs }
-            />))}
+      <div  className="container w-[80vw] mx-auto mt-10">
+        {loading ? (
+          <Loading />
+        ) : (
+          <div>
+            {favoriteSongs.map((song) => (
+              <MusicCard
+                {...song}
+                key={song.trackId}
+                attSongs={attSongs}
+                setSelectedSong={this.setSelectedSong}
+              />
+            ))}
           </div>
         )}
-
-      </>
+        {selectedSong.previewUrl && <MusicBar song={selectedSong} />}
+      </div>
     );
   }
 }

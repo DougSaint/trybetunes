@@ -1,9 +1,17 @@
-import React from 'react';
+import React from "react";
 
-class Loading extends React.Component {
-  render() {
-    return (<p>Carregando...</p>);
-  }
-}
+const Loading = () => {
+  return (
+    /* Animation loading overlay*/
+
+    <div className="loading">
+      <div className="loading__overlay">
+        <div className="loading__overlay__content">
+          <div className="loading__overlay__content__spinner" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Loading;

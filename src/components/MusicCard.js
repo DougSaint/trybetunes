@@ -1,32 +1,42 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import './MusicCard.css';
-import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
-import Loading from './Loading';
+import PropTypes from "prop-types";
+import React from "react";
+import "./MusicCard.css";
+import {
+  addSong,
+  removeSong,
+  getFavoriteSongs,
+} from "../services/favoriteSongsAPI";
+import Loading from "./Loading";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 
 class MusicCard extends React.Component {
   state = {
     loading: false,
-    checkbox: false,
+    isFavorite: false,
   };
 
   async componentDidMount() {
-    const favoriteSongs = await getFavoriteSongs() || [];
+    const favoriteSongs = (await getFavoriteSongs()) || [];
+    this.setState({ loading: true });
+
     const { trackId } = this.props;
     if (favoriteSongs.some((song) => song.trackId === trackId)) {
-      this.setState({ checkbox: true });
+      this.setState({ isFavorite: true });
     }
+    this.setState({ loading: false });
   }
 
-  favorite = async ({ target: { checked } }) => {
+  favorite = async () => {
     this.setState({ loading: true });
     const { attSongs } = this.props;
-    if (checked) {
-      this.setState({ checkbox: true });
+    if (this.state.isFavorite === false) {
+      this.setState({ isFavorite: true });
       await addSong({ ...this.props });
       this.setState({ loading: false }, attSongs);
     } else {
-      this.setState({ checkbox: false });
+      this.setState({ isFavorite: false });
       await removeSong({ ...this.props });
       await attSongs();
       this.setState({ loading: false });
@@ -34,38 +44,33 @@ class MusicCard extends React.Component {
   };
 
   render() {
-    const { trackId, trackName, previewUrl } = this.props;
-    const { loading, checkbox } = this.state;
-
-    const favoriteInput = (
-      <label htmlFor={ trackId }>
-        Favorita
-        <input
-          type="checkbox"
-          name={ trackId }
-          id={ trackId }
-          data-testid={ `checkbox-music-${trackId}` }
-          onChange={ this.favorite }
-          checked={ checkbox }
-        />
-      </label>
-    );
-
+    const { trackId, trackName, previewUrl, setSelectedSong } = this.props;
+    const { loading, isFavorite } = this.state;
+    
     return (
-      <div className="flex center">
-
-        <div className="musicWrapper">
-          <em className="musicName">{trackName}</em>
-          <audio data-testid="audio-component" src={ previewUrl } controls>
-            <track kind="captions" />
-            O seu navegador não suporta o elemento
-            {' '}
-            {' '}
-            <code>audio</code>
-            .
-          </audio>
+      <div className="flex justify-between my-2">
+        {loading && <Loading />}
+        <div className="flex">
+          <FontAwesomeIcon
+            icon={faCirclePlay}
+            onClick={() => setSelectedSong(this.props)}
+            className="w-8 my-auto cursor-pointer hover:text-slate-400 text-white"
+          />
+          <p className="text-slate-50 font-italic">{trackName}</p>
         </div>
-        {loading ? <Loading /> : favoriteInput}
+
+        <div class="flex">
+          <button
+            className="bg-none"
+            onClick={this.favorite}
+            title={isFavorite ? "Remover dos favoritos " : "Favoritar"}
+          >
+            <FontAwesomeIcon
+              icon={faHeart}
+              className={isFavorite ? "text-green-600 :" : "text-slate-50"}
+            />
+          </button>
+        </div>
       </div>
     );
   }

@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import Header from '../components/Header';
-import getMusics from '../services/musicsAPI';
-import MusicCard from '../components/MusicCard';
+import PropTypes from "prop-types";
+import React from "react";
+import MusicBar from "../components/MusicBar";
+import getMusics from "../services/musicsAPI";
+import MusicCard from "../components/MusicCard";
 
 class Album extends React.Component {
   constructor() {
@@ -10,50 +10,81 @@ class Album extends React.Component {
 
     this.state = {
       songs: [],
-      artist: '',
-      albumName: '',
-      artworkUrl100: '',
+      artist: "",
+      albumName: "",
+      artworkUrl100: "",
+      selectedSong: {},
     };
   }
 
+  setSelectedSong = (song) => {
+    this.setState({ selectedSong: song });
+  };
+
   async componentDidMount() {
-    const { match: { params: { id } } } = this.props;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+
     const data = await getMusics(id);
+
     this.setState({
       songs: data.filter((el) => el.trackName),
       artist: data[0].artistName,
       albumName: data[0].collectionName,
       artworkUrl100: data[0].artworkUrl100,
+      copyright: data[0].copyright,
     });
   }
 
   render() {
-    const { artist, albumName, songs, artworkUrl100 } = this.state;
+    const { artist, albumName, songs, artworkUrl100, copyright, selectedSong } =
+      this.state;
     const { attSongs } = this.props;
     return (
       <>
-        <Header />
-        <div data-testid="page-album" className="container flex">
-          <aside className="description">
-            <h3 data-testid="artist-name">{artist}</h3>
-            <h3 data-testid="album-name">
-              {albumName}
-
-            </h3>
+        <div className="container w-[80vw] mx-auto mt-10">
+          <aside className="flex  ">
             <img
-              src={ artworkUrl100 }
-              className="albumImg"
-              alt={ `Album  of ${artist}` }
+              src={artworkUrl100}
+              className="rounded-full"
+              alt={`Album  of ${artist}`}
             />
+            <div className="flex flex-col justify-between pl-5">
+              <h3 className=" py-2 mt-4  text-xl text-gray-200 hover:text-gray-200">
+                {albumName}
+              </h3>
+
+              <h3 className="text-slate-100 ">
+                Artista:{" "}
+                <span className=" py-2 mt-4 text-gray-200 hover:text-gray-200">
+                  {artist}{" "}
+                </span>
+              </h3>
+
+              {copyright && (
+                <span className="text-slate-50/50 text-xs self-align-end">
+                  {" "}
+                  {copyright}
+                </span>
+              )}
+            </div>
           </aside>
 
-          <section className="songs">
-            {songs.map((song) => (<MusicCard
-              { ...song }
-              key={ song.trackId }
-              attSongs={ attSongs }
-            />))}
+          <section className="songs mt-10">
+            {songs.map((song) => (
+              <MusicCard
+                {...song}
+                key={song.trackId}
+                attSongs={attSongs}
+                setSelectedSong={this.setSelectedSong}
+              />
+            ))}
           </section>
+
+          {selectedSong.previewUrl && <MusicBar song={selectedSong}/>}
         </div>
       </>
     );

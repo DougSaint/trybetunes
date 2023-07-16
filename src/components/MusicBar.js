@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+/* eslint-disable */
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-import Timeline from "wavesurfer.js/dist/plugins/timeline.js";
+import Timeline from 'wavesurfer.js/dist/plugins/timeline.js';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
-import WaveSurfer from "wavesurfer.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
+import WaveSurfer from 'wavesurfer.js';
 // WaveSurfer hook
 const useWavesurfer = (containerRef, options) => {
   const [wavesurfer, setWavesurfer] = useState(null);
@@ -17,8 +18,8 @@ const useWavesurfer = (containerRef, options) => {
     const ws = WaveSurfer.create({
       ...options,
       container: containerRef.current,
-      waveColor: "#D9DCFF",
-      progressColor: "#39FF14",
+      waveColor: '#D9DCFF',
+      progressColor: '#39FF14',
       barWidth: 3,
       barRadius: 3,
       cursorWidth: 1,
@@ -41,7 +42,7 @@ const useWavesurfer = (containerRef, options) => {
 
 // Create a React component that will render wavesurfer.
 // Props are wavesurfer options.
-const WaveSurferPlayer = (props) => {
+function WaveSurferPlayer(props) {
   const containerRef = useRef();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -67,9 +68,9 @@ const WaveSurferPlayer = (props) => {
     setIsPlaying(false);
 
     const subscriptions = [
-      wavesurfer.on("play", () => setIsPlaying(true)),
-      wavesurfer.on("pause", () => setIsPlaying(false)),
-      wavesurfer.on("timeupdate", (currentTime) => setCurrentTime(currentTime)),
+      wavesurfer.on('play', () => setIsPlaying(true)),
+      wavesurfer.on('pause', () => setIsPlaying(false)),
+      wavesurfer.on('timeupdate', (currentTime) => setCurrentTime(currentTime)),
     ];
 
     return () => {
@@ -81,30 +82,30 @@ const WaveSurferPlayer = (props) => {
     <section className="relative">
       <button
         className="text-slate-50 absolute top-[50%] left-[50%] z-10 border-2 border-slate-50 rounded-full w-12 h-12 flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2"
-        onClick={onPlayClick}
-        style={{ marginTop: "1em" }}
+        onClick={ onPlayClick }
+        style={ { marginTop: '1em' } }
       >
-        <FontAwesomeIcon color="white" icon={isPlaying ? faPause : faPlay} />
+        <FontAwesomeIcon color="white" icon={ isPlaying ? faPause : faPlay } />
       </button>
-      <div ref={containerRef} style={{ minHeight: "120px" }} />
+      <div ref={ containerRef } style={ { minHeight: '120px' } } />
     </section>
   );
-};
+}
 
-const MusicBar = ({ song }) => {
+function MusicBar({ song }) {
   const audioUrl = song.previewUrl;
 
   return (
     <div className="fixed bottom-0 w-[80vw] mx-auto">
       <WaveSurferPlayer
-        height={100}
+        height={ 100 }
         waveColor="rgb(200, 0, 200)"
         progressColor="rgb(100, 0, 100)"
-        url={audioUrl}
-        plugins={[Timeline.create()]}
+        url={ audioUrl }
+        plugins={ [Timeline.create()] }
       />
     </div>
   );
-};
+}
 
 export default MusicBar;

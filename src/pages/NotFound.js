@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import React from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 class NotFound extends React.Component {
   render() {
@@ -10,7 +10,8 @@ class NotFound extends React.Component {
         </h1>
         <img src="https://media.giphy.com/media/3o7aCSPqXE5C6T8tBC/giphy.gif" alt="Página não encontrada" className="mx-auto" />
         <p className="text-slate-50 text-center">
-          Acho que você se perdeu no caminho, que tal{" "}
+          Acho que você se perdeu no caminho, que tal
+          {' '}
           <Link className="underline font-bold" to="/">
             voltar
           </Link>

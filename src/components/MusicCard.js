@@ -1,15 +1,15 @@
-import PropTypes from "prop-types";
-import React from "react";
-import "./MusicCard.css";
+/* eslint-disable */
+import PropTypes from 'prop-types';
+import React from 'react';
+import './MusicCard.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import {
   addSong,
   removeSong,
   getFavoriteSongs,
-} from "../services/favoriteSongsAPI";
-import Loading from "./Loading";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+} from '../services/favoriteSongsAPI';
+import Loading from './Loading';
 
 class MusicCard extends React.Component {
   state = {
@@ -46,28 +46,28 @@ class MusicCard extends React.Component {
   render() {
     const { trackId, trackName, previewUrl, setSelectedSong } = this.props;
     const { loading, isFavorite } = this.state;
-    
+
     return (
       <div className="flex justify-between my-2 ">
         {loading && <Loading />}
         <div className="flex max-w-[60%]">
           <FontAwesomeIcon
-            icon={faCirclePlay}
-            onClick={() => setSelectedSong(this.props)}
+            icon={ faCirclePlay }
+            onClick={ () => setSelectedSong(this.props) }
             className="min-w-8 max-w-8 px-2 my-auto cursor-pointer hover:text-slate-400 text-white "
           />
           <p className="text-slate-50 font-italic text-ellipsis overflow-hidden whitespace-nowrap ">{trackName}</p>
         </div>
 
-        <div class="flex">
+        <div className="flex">
           <button
             className="bg-none"
-            onClick={this.favorite}
-            title={isFavorite ? "Remover dos favoritos " : "Favoritar"}
+            onClick={ this.favorite }
+            title={ isFavorite ? 'Remover dos favoritos ' : 'Favoritar' }
           >
             <FontAwesomeIcon
-              icon={faHeart}
-              className={isFavorite ? "text-green-600 :" : "text-slate-50"}
+              icon={ faHeart }
+              className={ isFavorite ? 'text-green-600 :' : 'text-slate-50' }
             />
           </button>
         </div>

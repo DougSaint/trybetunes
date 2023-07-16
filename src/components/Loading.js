@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-const Loading = () => {
+function Loading() {
   return (
-    /* Animation loading overlay*/
+  /* Animation loading overlay */
 
     <div className="loading">
       <div className="loading__overlay">
@@ -12,6 +12,6 @@ const Loading = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Loading;

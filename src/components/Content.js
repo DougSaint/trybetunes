@@ -38,7 +38,7 @@ class Content extends React.Component {
               attSongs={ this.attSongs }
             />) }
           />
-          
+
           <Route path="/profile/edit" component={ ProfileEdit } />
           <Route path="/profile" component={ Profile } />
           <Route

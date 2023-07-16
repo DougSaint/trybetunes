@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import MusicCard from "../components/MusicCard";
-import Loading from "../components/Loading";
-import MusicBar from "../components/MusicBar";
+import React from 'react';
+import PropTypes from 'prop-types';
+import MusicCard from '../components/MusicCard';
+import Loading from '../components/Loading';
+import MusicBar from '../components/MusicBar';
 
 class Favorites extends React.Component {
   state = { loading: false, selectedSong: {} };
@@ -19,25 +19,25 @@ class Favorites extends React.Component {
   };
 
   render() {
-    const { favoriteSongs, attSongs,  } = this.props;
+    const { favoriteSongs, attSongs } = this.props;
     const { loading, selectedSong } = this.state;
     return (
-      <div  className="container w-[80vw] mx-auto mt-10">
+      <div className="container w-[80vw] mx-auto mt-10">
         {loading ? (
           <Loading />
         ) : (
           <div>
             {favoriteSongs.map((song) => (
               <MusicCard
-                {...song}
-                key={song.trackId}
-                attSongs={attSongs}
-                setSelectedSong={this.setSelectedSong}
+                { ...song }
+                key={ song.trackId }
+                attSongs={ attSongs }
+                setSelectedSong={ this.setSelectedSong }
               />
             ))}
           </div>
         )}
-        {selectedSong.previewUrl && <MusicBar song={selectedSong} />}
+        {selectedSong.previewUrl && <MusicBar song={ selectedSong } />}
       </div>
     );
   }

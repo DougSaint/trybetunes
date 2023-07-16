@@ -5,7 +5,7 @@ import Content from './components/Content';
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/trybetunes">
         <div className="app">
           <Content />
         </div>

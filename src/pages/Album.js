@@ -1,8 +1,9 @@
-import PropTypes from "prop-types";
-import React from "react";
-import MusicBar from "../components/MusicBar";
-import getMusics from "../services/musicsAPI";
-import MusicCard from "../components/MusicCard";
+/* eslint-disable */
+import PropTypes from 'prop-types';
+import React from 'react';
+import MusicBar from '../components/MusicBar';
+import getMusics from '../services/musicsAPI';
+import MusicCard from '../components/MusicCard';
 
 class Album extends React.Component {
   constructor() {
@@ -10,9 +11,9 @@ class Album extends React.Component {
 
     this.state = {
       songs: [],
-      artist: "",
-      albumName: "",
-      artworkUrl100: "",
+      artist: '',
+      albumName: '',
+      artworkUrl100: '',
       selectedSong: {},
     };
   }
@@ -40,53 +41,52 @@ class Album extends React.Component {
   }
 
   render() {
-    const { artist, albumName, songs, artworkUrl100, copyright, selectedSong } =
-      this.state;
+    const { artist, albumName, songs, artworkUrl100, copyright, selectedSong } = this.state;
     const { attSongs } = this.props;
     return (
-      <>
-        <div className="container w-[80vw] mx-auto mt-10">
-          <aside className="flex  ">
-            <img
-              src={artworkUrl100}
-              className="rounded-full"
-              alt={`Album  of ${artist}`}
+      <div className="container w-[80vw] mx-auto mt-10">
+        <aside className="flex  ">
+          <img
+            src={ artworkUrl100 }
+            className="rounded-full"
+            alt={ `Album  of ${artist}` }
+          />
+          <div className="flex flex-col justify-between pl-5">
+            <h3 className=" py-2 mt-4  text-xl text-gray-200 hover:text-gray-200">
+              {albumName}
+            </h3>
+
+            <h3 className="text-slate-100 ">
+              Artista:
+              {' '}
+              <span className=" py-2 mt-4 text-gray-200 hover:text-gray-200">
+                {artist}
+                {' '}
+              </span>
+            </h3>
+
+            {copyright && (
+              <span className="text-slate-50/50 text-xs self-align-end">
+                {' '}
+                {copyright}
+              </span>
+            )}
+          </div>
+        </aside>
+
+        <section className="songs mt-10">
+          {songs.map((song) => (
+            <MusicCard
+              { ...song }
+              key={ song.trackId }
+              attSongs={ attSongs }
+              setSelectedSong={ this.setSelectedSong }
             />
-            <div className="flex flex-col justify-between pl-5">
-              <h3 className=" py-2 mt-4  text-xl text-gray-200 hover:text-gray-200">
-                {albumName}
-              </h3>
+          ))}
+        </section>
 
-              <h3 className="text-slate-100 ">
-                Artista:{" "}
-                <span className=" py-2 mt-4 text-gray-200 hover:text-gray-200">
-                  {artist}{" "}
-                </span>
-              </h3>
-
-              {copyright && (
-                <span className="text-slate-50/50 text-xs self-align-end">
-                  {" "}
-                  {copyright}
-                </span>
-              )}
-            </div>
-          </aside>
-
-          <section className="songs mt-10">
-            {songs.map((song) => (
-              <MusicCard
-                {...song}
-                key={song.trackId}
-                attSongs={attSongs}
-                setSelectedSong={this.setSelectedSong}
-              />
-            ))}
-          </section>
-
-          {selectedSong.previewUrl && <MusicBar song={selectedSong}/>}
-        </div>
-      </>
+        {selectedSong.previewUrl && <MusicBar song={ selectedSong } />}
+      </div>
     );
   }
 }

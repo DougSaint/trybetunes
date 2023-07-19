@@ -74,7 +74,7 @@ class Album extends React.Component {
           </div>
         </aside>
 
-        <section className="songs mt-10">
+        <section className="songs mt-10 max-h-[60vh] overflow-y-scroll">
           {songs.map((song) => (
             <MusicCard
               { ...song }

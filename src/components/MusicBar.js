@@ -55,19 +55,12 @@ function WaveSurferPlayer(props) {
 
   useEffect(() => {
     if (!wavesurfer) return;
-    console.log(wavesurfer);
-    setTimeout(() => {
-      wavesurfer.play();
-    }, 800);
-  }, [wavesurfer]);
-
-  useEffect(() => {
-    if (!wavesurfer) return;
 
     setCurrentTime(0);
     setIsPlaying(false);
 
     const subscriptions = [
+      wavesurfer.on('ready', wavesurfer.play.bind(wavesurfer)),
       wavesurfer.on('play', () => setIsPlaying(true)),
       wavesurfer.on('pause', () => setIsPlaying(false)),
       wavesurfer.on('timeupdate', (currentTime) => setCurrentTime(currentTime)),

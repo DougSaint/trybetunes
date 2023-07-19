@@ -58,7 +58,7 @@ function WaveSurferPlayer(props) {
     console.log(wavesurfer);
     setTimeout(() => {
       wavesurfer.play();
-    }, 1800);
+    }, 800);
   }, [wavesurfer]);
 
   useEffect(() => {

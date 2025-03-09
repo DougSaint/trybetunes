@@ -1,15 +1,35 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #7e22ce; /* Roxo principal (purple-700) */
+  --color-primary-light: #a855f7; /* Roxo mais claro (purple-500) */
+  --color-secondary: #06b6d4; /* Ciano (cyan-500) */
+  --color-dark: #0f172a; /* Fundo escuro (slate-900) */
+  --color-dark-light: #1e293b; /* Fundo um pouco mais claro (slate-800) */
+  --color-light: #f8fafc; /* Texto claro (slate-50) */
+  --color-light-muted: #cbd5e1; /* Texto secundário (slate-300) */
+  --color-success: #10b981; /* Verde para favoritos (emerald-500) */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --shadow-normal: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  overflow-x: hidden;
 }
 
 code {
@@ -17,14 +37,34 @@ code {
     monospace;
 }
 
+/* Estilização do scroll */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
+::-webkit-scrollbar-track {
+  background: var(--color-dark-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Melhorias no loading */
 .loading{
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(5px);
   z-index: 999;
 }
 
@@ -34,7 +74,6 @@ code {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: rgba(0, 0, 0, 0.5); */
   z-index: 1000;
 }
 
@@ -44,13 +83,15 @@ code {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .loading__overlay__content__spinner{
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border: 10px solid #fff;
-  border-top-color: #000;
+  border: 3px solid var(--color-light-muted);
+  border-top-color: var(--color-primary);
   animation: spin 1s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(126, 34, 206, 0.4);
 }
 
 @keyframes spin{
@@ -59,22 +100,98 @@ code {
   }
 }
 
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Classes de animação */
+.fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+.slide-up {
+  animation: slideUp var(--transition-normal) forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight var(--transition-normal) forwards;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Efeitos hover e transições */
+.hover-scale {
+  transition: transform var(--transition-fast);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Logo responsiva com efeito de brilho */
 .logo{
   width: 600px;
+  filter: drop-shadow(0 0 8px rgba(126, 34, 206, 0.6));
+  transition: filter var(--transition-normal);
 }
+
+.logo:hover {
+  filter: drop-shadow(0 0 12px rgba(126, 34, 206, 0.8));
+}
+
 @media screen and (max-width: 1024px){
   .logo{
-    width: 600px;
+    width: 500px;
   }
 }
 
 @media screen and (max-width: 768px){
   .logo{
-    width: 500px;
-  }
-}
-@media screen and (max-width: 480px){
-  .logo{
     width: 400px;
   }
+}
+
+@media screen and (max-width: 480px){
+  .logo{
+    width: 300px;
+  }
+}
+
+/* Suavizar transições de páginas e elementos */
+.app-container {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Estilos para cards */
+.card {
+  background: var(--color-dark-light);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  box-shadow: var(--shadow-normal);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-large);
 }

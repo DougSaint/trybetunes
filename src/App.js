@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter basename="/trybetunes">
-        <div className="app">
+        <div className="app bg-[var(--color-dark)] min-h-screen text-[var(--color-light)]">
           <Content />
         </div>
       </BrowserRouter>
